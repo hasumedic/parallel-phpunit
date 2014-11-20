@@ -16,7 +16,7 @@ def main():
 
     args = parser.parse_args()
 
-    test_runner = TestRunner(args.test_cases_dirs, args.max_concurrency, args.configuration, args.phpunit_bin, args.test_suffix)
+    test_runner = TestRunner(args.test_cases_dirs, args.max_concurrency, args.configuration, args.phpunit_bin, args.test_suffix, args.testsuite)
     is_successful = test_runner.run()
 
     if not is_successful:

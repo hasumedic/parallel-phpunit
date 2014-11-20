@@ -1,4 +1,4 @@
-from parallelphpunit.files import find_test_case_files
+from parallelphpunit.files import find_test_case_files, find_test_case_files_from_config
 import subprocess
 import re
 from parallelphpunit.suite import Report, ReportScreen
@@ -14,13 +14,15 @@ class TestRunner:
             max_concurrency,
             configuration_path=None,
             phpunit_bin='phpunit',
-            test_suffix='Test.php'
+            test_suffix='Test.php',
+            testsuite=None,
     ):
         self._test_cases_path = test_cases_path
         self._max_concurrency = max_concurrency
         self._configuration_path = None if configuration_path is None else abspath(configuration_path)
         self._phpunit_bin = phpunit_bin
         self._test_suffix = test_suffix
+        self._testsuite = testsuite
 
     def run(self):
         report = Report(ReportScreen())
@@ -28,7 +30,10 @@ class TestRunner:
         if self._configuration_path is not None:
             print("Configuration read from %s\n" % self._configuration_path)
 
-        remaining_test_case_files = find_test_case_files(self._test_cases_path, self._test_suffix)
+        if self._testsuite is not None:
+            remaining_test_case_files = configuration_test_case_files = find_test_case_files_from_config(self._configuration_path, self._testsuite)
+        else:
+            remaining_test_case_files = find_test_case_files(self._test_cases_path, self._test_suffix)
         processes = set()
         while remaining_test_case_files or processes:
             if remaining_test_case_files and len(processes) < self._max_concurrency:
