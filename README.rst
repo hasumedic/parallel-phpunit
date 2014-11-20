@@ -32,6 +32,7 @@ Usage is as follows:
                           [--configuration CONFIGURATION]
                           [--phpunit_bin PHPUNIT_BIN]
                           [--test_suffix TEST_SUFFIX]
+                          [--testsuite TEST_SUITE_NAME]
                           [TestCases Dirs [TestCases Dirs ...]]
 
     positional arguments:
