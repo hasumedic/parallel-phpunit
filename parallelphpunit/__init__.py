@@ -12,6 +12,7 @@ def main():
     parser.add_argument('--configuration', '-c', type=str, help='Read configuration from XML file')
     parser.add_argument('--phpunit_bin', default='phpunit', type=str, help='phpunit bin path')
     parser.add_argument('--test_suffix', default='Test.php', type=str, help='phpunit test suffix (by default Test.php)')
+    parser.add_argument('--testsuite', type=str, help='Name of the testsuite to execute')
 
     args = parser.parse_args()
 

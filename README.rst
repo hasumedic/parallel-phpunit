@@ -47,3 +47,5 @@ Usage is as follows:
                             phpunit bin path
       --test_suffix TEST_SUFFIX
                             phpunit test suffix (by default Test.php)
+      --testsuite TEST_SUITE_NAME
+                            name of the testsuite to be executed
