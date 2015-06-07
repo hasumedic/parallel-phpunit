@@ -22,6 +22,9 @@ class TestRunner:
         self._configuration_path = None if configuration_path is None else abspath(configuration_path)
         self._phpunit_bin = phpunit_bin
         self._test_suffix = test_suffix
+        if testsuite is not None and self._configuration_path is None:
+            print('\033[41m%s\033[m' % 'You cannot filter by testsuite without specifying an .xml configuration')
+            exit(2)
         self._testsuite = testsuite
 
     def run(self):
@@ -31,7 +34,7 @@ class TestRunner:
             print("Configuration read from %s\n" % self._configuration_path)
 
         if self._testsuite is not None:
-            remaining_test_case_files = configuration_test_case_files = find_test_case_files_from_config(self._configuration_path, self._testsuite)
+            remaining_test_case_files = find_test_case_files_from_config(self._configuration_path, self._testsuite)
         else:
             remaining_test_case_files = find_test_case_files(self._test_cases_path, self._test_suffix)
         processes = set()
